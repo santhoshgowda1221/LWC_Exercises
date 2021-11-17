@@ -13,6 +13,7 @@ export default class StudentTile extends LightningElement {
     }
 
     studentClick(){
-        alert(this.student.Name);
+       debugger;
+       console.log(this.student.name);
     }
 }
