@@ -1,9 +1,26 @@
 <template>
-	<div class="slds-m-bottom_small">
-		<lightning-card title="Student Filters" icon-name="utility:search">
+    <div class="slds-m-bottom_small">
+        <lightning-card title="Student Filters" icon-name="utility:search">
             <div class="slds-p-horizontal_small">
-                <h1 class="crazycomic">The information fillter goes here   ok!</h1>
+                <lightning-layout>
+                    <lightning-layout-item size="4" padding="around-small">
+                        <lightning-combobox name="instructor" label="instructors" value={selectedInstructorId} options={instructors}
+                            placeholder="Select an Instructor" onchange={onInstructorChange} variant="label-hidden">
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="4" padding="around-small">
+                        <lightning-combobox name="delivery" label="deliveries" value={selectedDeliveryId} options={deliveries}
+                            placeholder="Select an Delivery" onchange={onDeliveryChange} variant="label-hidden">
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="4" padding="around-small">
+                        <lightning-button label="Create New Delivery" onclick={createNewDelivery} variant="destructive">
+                        </lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
             </div>
-		</lightning-card>
-	</div>
+        </lightning-card>
+    </div>
 </template>
