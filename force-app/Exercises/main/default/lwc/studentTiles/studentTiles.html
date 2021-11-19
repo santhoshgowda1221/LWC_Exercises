@@ -1,5 +1,14 @@
 <template>
     <template for:each={studentList} for:item="student">
-        <c-student-tile student={student} key={student.Id} is-selected></c-student-tile>
+        <c-student-tile student={student} key={student.Id} onstudentselected={handleStudentSelected} selected-student-id ={selectedStudent}></c-student-tile>
     </template>
 </template>
+
+
+<!-- <lightning-layout if:true={studentList} horizontal-align="center" multiple-rows>
+    <template for:each={studentList} for:item="student">
+        <lightning-layout-item padding="around-small" key={student.Id} size="6" small-device-size="6" medium-device-size="4" large-device-size="3">
+       <c-student-tile student={student} onstudentselected={handleStudentSelected} selected-student-id={selectedStudent}></c-student-tile>
+    </lightning-layout-item>
+    </template>
+</lightning-layout> -->

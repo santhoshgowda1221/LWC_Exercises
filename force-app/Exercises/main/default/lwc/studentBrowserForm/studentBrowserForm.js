@@ -51,9 +51,11 @@ export default class StudentBrowserForm extends NavigationMixin(LightningElement
     }
     onInstructorChange(event){
         this.selectedInstructorId = event.target.value;
+        this.notifyParent();
     }
     onDeliveryChange(event){
         this.selectedDeliveryId = event.target.value
+        this.notifyParent();
     }
 
     createNewDelivery() {
@@ -71,5 +73,18 @@ export default class StudentBrowserForm extends NavigationMixin(LightningElement
                 defaultFieldValues: defaultValues
             }
         });
+    }
+
+
+    //custom event to pass child to parent 
+    notifyParent(){
+        const evt = new CustomEvent('filterchange',{
+        detail:{
+            instructorId: this.selectedInstructorId,
+            deliveryId: this.selectedDeliveryId
+        }
+    });
+
+    this.dispatchEvent(evt);
     }
 }

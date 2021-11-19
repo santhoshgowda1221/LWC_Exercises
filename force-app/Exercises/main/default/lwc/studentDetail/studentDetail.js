@@ -1,5 +1,7 @@
 import { LightningElement, wire } from 'lwc';
 import {getRecord, getFieldValue, getFieldDisplayValue} from 'lightning/uiRecordApi';
+import {NavigationMixin} from 'lightning/navigation';
+import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
 // TODO #2: import the getRecord, getFieldValue, and getFieldDisplayValue functions from lightning/uiRecordApi.
 
 // TODO #3: We've imported the name field and placed it into an array for you.
@@ -11,9 +13,10 @@ import FIELD_Description from '@salesforce/schema/Contact.Description';
 import FIELD_Phone from '@salesforce/schema/Contact.Phone';
 import FIELD_Email from '@salesforce/schema/Contact.Email';
 
+
 const fields = [FIELD_Name,FIELD_Description,FIELD_Phone,FIELD_Email];
 
-export default class StudentDetail extends LightningElement {
+export default class StudentDetail extends NavigationMixin(LightningElement) {
 
 	// TODO #4: locate a valid Contact ID in your scratch org and store it in the studentId property.
 	// Example: studentId = '003S000001SBAXEIA5';
@@ -55,4 +58,13 @@ export default class StudentDetail extends LightningElement {
 		return getFieldDisplayValue(data, field) ? getFieldDisplayValue(data, field) : getFieldValue(data, field);
 	}
 	
+    handleButton(){
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.studentId,
+                actionName: 'view'
+            }
+        });
+    }
 }

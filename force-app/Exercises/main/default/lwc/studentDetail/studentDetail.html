@@ -1,7 +1,10 @@
 <template>
 		
     <!-- todo #8: use the cardTitle getter to display a dynamic title for the lightning-card -->
+    
     <lightning-card title={cardTitle} >
+        <lightning-button variant="destrcutive" label="GoToRecord" style="float: right" onchange={handleButton}> </lightning-button>
+        
             
         <template if:true={wiredStudent.error}>
             <div class="slds-var-p-horizontal_medium">
@@ -10,6 +13,7 @@
         </template>
 
         <template if:true={wiredStudent.data}>
+            
             <div class="slds-var-p-horizontal_medium">
                 Email:<lightning-formatted-email value={Email}></lightning-formatted-email><br/>
                 Phone:<lightning-formatted-phone value={Phone}></lightning-formatted-phone><br/>
