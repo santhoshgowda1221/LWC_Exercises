@@ -2,6 +2,8 @@ import { LightningElement, wire } from 'lwc';
 import {getRecord, getFieldValue, getFieldDisplayValue} from 'lightning/uiRecordApi';
 import {NavigationMixin} from 'lightning/navigation';
 import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
+import SELECTED_STUDENT_CHANNEL from '@salesforce/messageChannel/SelectedStudentChannel__c';
+import {publish, MessageContext, subscribe, unsubscribe} from 'lightning/messageService';
 // TODO #2: import the getRecord, getFieldValue, and getFieldDisplayValue functions from lightning/uiRecordApi.
 
 // TODO #3: We've imported the name field and placed it into an array for you.
@@ -20,11 +22,30 @@ export default class StudentDetail extends NavigationMixin(LightningElement) {
 
 	// TODO #4: locate a valid Contact ID in your scratch org and store it in the studentId property.
 	// Example: studentId = '003S000001SBAXEIA5';
-	studentId = '0031100001s2MjwAAE';
+	studentId;
+    subscription;
 
 	//TODO #5: use wire service to call getRecord, passing in our studentId and array of fields.
 	//		   Store the result in a property named wiredStudent.
 	@wire(getRecord, { recordId:'$studentId', fields }) wiredStudent;
+    @wire(MessageContext) info;
+
+    connectedCallback(){
+        if(this.subscription){
+            return;
+        }this.subscription = subscribe(this.info, SELECTED_STUDENT_CHANNEL, (message)=>{
+            this.handleStudentSelected(message);
+        } );
+        }
+        handleStudentSelected(message){
+            this.studentId = message.studentId;
+    }
+
+    disconnectedCallback(){
+        unsubscribe(this.subscription);
+        this.subscription = null;
+
+    }
 		
 	get name() {
 		return this._getDisplayValue(this.wiredStudent.data, FIELD_Name);
@@ -63,6 +84,7 @@ export default class StudentDetail extends NavigationMixin(LightningElement) {
             type: 'standard__recordPage',
             attributes: {
                 recordId: this.studentId,
+                objectApiName: 'Contact',
                 actionName: 'view'
             }
         });

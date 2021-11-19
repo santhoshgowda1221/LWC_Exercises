@@ -1,6 +1,9 @@
 import { LightningElement, wire } from "lwc";
 import getStudents from "@salesforce/apex/StudentBrowser.getStudents";
+import SELECTED_STUDENT_CHANNEL from '@salesforce/messageChannel/SelectedStudentChannel__c';
+import {publish, MessageContext} from 'lightning/messageService';
 export default class StudentBrowser extends LightningElement {
+    @wire(MessageContext) info;
 	selectedInstructorId = "";
 	selectedDeliveryId = "";
 
@@ -13,5 +16,13 @@ export default class StudentBrowser extends LightningElement {
 		this.selectedDeliveryId = event.detail.deliveryId;
 	}
 
-   
+    handleStudentSelected(event){
+ const updatedStudentId = event.detail.studentId;
+ console.log(updatedStudentId);
+ this.updateSelectedStudent(updatedStudentId);
+    }
+
+    updateSelectedStudent(updatedStudentId){
+        publish(this.info, SELECTED_STUDENT_CHANNEL , {studentId:updatedStudentId} );
+    }
 }
