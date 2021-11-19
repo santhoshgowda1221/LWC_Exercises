@@ -1,3 +1,5 @@
 import { LightningElement } from 'lwc';
 
-export default class DeliveryListAction extends LightningElement {}
+export default class DeliveryListAction extends LightningElement {
+    
+}
