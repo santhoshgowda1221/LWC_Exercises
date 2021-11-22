@@ -1,0 +1,4 @@
+<aura:component isTemplate="true" extends="aura:template">
+    <aura:set attribute="title" value="Worldwide Deliveries in App Template"/>
+    <aura:set attribute="auraResetStyle" value=""/>
+</aura:component>	
