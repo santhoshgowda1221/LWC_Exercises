@@ -46,6 +46,12 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	}
 
 	updateSelectedStudent(updatedStudentId) {
+		const grid = this.template.querySelector("c-responsive-datatable");
+		const gallery = this.template.querySelector("c-student-tiles");
+		if (gallery) {
+		}
+		if (grid) {
+		}
 		publish(this.info, SELECTED_STUDENT_CHANNEL, { studentId: updatedStudentId });
 	}
 
@@ -59,5 +65,10 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 				actionName: "edit"
 			}
 		});
+	}
+
+	handleRowClick(event) {
+		const studentId = event.detail.pk;
+		this.updateSelectedStudent(studentId);
 	}
 }
