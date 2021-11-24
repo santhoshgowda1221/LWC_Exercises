@@ -1,5 +1,5 @@
 import { LightningElement, wire } from 'lwc';
-import {getRecord, getFieldValue, getFieldDisplayValue} from 'lightning/uiRecordApi';
+import {getRecord} from 'lightning/uiRecordApi';
 import {NavigationMixin} from 'lightning/navigation';
 import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
 import SELECTED_STUDENT_CHANNEL from '@salesforce/messageChannel/SelectedStudentChannel__c';
