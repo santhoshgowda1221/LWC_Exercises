@@ -1,10 +1,10 @@
 <template>
 	<lightning-card title={certificationName}>
 		<lightning-button-group slot="actions">
-			<lightning-button label="Email" data-btn-id="btnEmail" onclick={onCertActions}></lightning-button>
-			<lightning-button label="Send Cert" data-btn-id="btnCert" onclick={onCertActions} variant="base"></lightning-button>
-			<lightning-button label="Delete" data-btn-id="btnDelete" onclick={onCertActions} variant="destructive"></lightning-button>
+			<lightning-button label="Email" data-btn-id="btnEmail" onclick={onCertActions}   variant="destructive" disabled={btnGroupDisabled} ></lightning-button>
+			<lightning-button label="Send Cert" data-btn-id="btnCert" onclick={onCertActions}  variant="destructive" disabled={btnGroupDisabled} ></lightning-button>
+			<lightning-button label="Delete" data-btn-id="btnDelete" onclick={onCertActions} variant="destructive" disabled={btnGroupDisabled}></lightning-button>
 		</lightning-button-group>
-		<lightning-datatable data={certifiedStudents} key-field="contactId" columns={columns}></lightning-datatable>
+		<lightning-datatable data={certifiedStudents} key-field="contactId" columns={columns} onrowselection={onRowSelection} ></lightning-datatable>
 	</lightning-card>
 </template>

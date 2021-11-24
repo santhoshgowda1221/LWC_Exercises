@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track} from 'lwc';
 import getCertifiedStudents from '@salesforce/apex/CertifiedStudentList.getCertifiedStudent';
 import deleteStudentCertifications from '@salesforce/apex/CertifiedStudentList.deleteStudentCertifications';
 import {refreshApex} from '@salesforce/apex';
@@ -10,6 +10,9 @@ export default class CertifiedStudentsList extends LightningElement {
     certifiedStudents=[];
     wiredStudentResult;
     error;
+	btnGroupDisabled = true;
+
+
     @wire(getCertifiedStudents,{certificationId : '$certificationId'}) wiredStudentsList(result){
         this.wiredStudentResult = result;
         this.certifiedStudents=[];
@@ -49,6 +52,10 @@ export default class CertifiedStudentsList extends LightningElement {
         }
     }
 
+onRowSelection(event) {
+const numSelected = event.detail.selectedRows.length;
+this.btnGroupDisabled = (numSelected === 0);
+}
     selectedIds(){
         const ref = this.template.querySelector('lightning-datatable');
         const ids = ref.getSelectedRows().map(r => r.certificationHeldId);
