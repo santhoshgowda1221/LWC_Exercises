@@ -4,6 +4,7 @@ import {NavigationMixin} from 'lightning/navigation';
 import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
 import SELECTED_STUDENT_CHANNEL from '@salesforce/messageChannel/SelectedStudentChannel__c';
 import {publish, MessageContext, subscribe, unsubscribe} from 'lightning/messageService';
+import Utils from 'c/utils';
 // TODO #2: import the getRecord, getFieldValue, and getFieldDisplayValue functions from lightning/uiRecordApi.
 
 // TODO #3: We've imported the name field and placed it into an array for you.
@@ -48,16 +49,16 @@ export default class StudentDetail extends NavigationMixin(LightningElement) {
     }
 		
 	get name() {
-		return this._getDisplayValue(this.wiredStudent.data, FIELD_Name);
+		return Utils.getDisplayValue(this.wiredStudent.data, FIELD_Name);
 	}
     get Description() {
-		return this._getDisplayValue(this.wiredStudent.data, FIELD_Description);
+		return Utils.getDisplayValue(this.wiredStudent.data, FIELD_Description);
 	}
     get Phone() {
-		return this._getDisplayValue(this.wiredStudent.data, FIELD_Phone);
+		return Utils.getDisplayValue(this.wiredStudent.data, FIELD_Phone);
 	}
     get Email() {
-		return this._getDisplayValue(this.wiredStudent.data, FIELD_Email);
+		return Utils.getDisplayValue(this.wiredStudent.data, FIELD_Email);
 	}
 
 	//TODO #6: We provided a getter for the name field. 
@@ -75,9 +76,9 @@ export default class StudentDetail extends NavigationMixin(LightningElement) {
 		return title;
 	}
 	
-	_getDisplayValue(data, field) {
-		return getFieldDisplayValue(data, field) ? getFieldDisplayValue(data, field) : getFieldValue(data, field);
-	}
+	// _getDisplayValue(data, field) {
+	// 	return getFieldDisplayValue(data, field) ? getFieldDisplayValue(data, field) : getFieldValue(data, field);
+	// }
 	
     handleButton(){
         this[NavigationMixin.Navigate]({
