@@ -1,4 +1,11 @@
 <template>
+	<span onshowmodal={handleShowModal}>
+	<c-modal header={modalHeader}>
+		{modalContent}
+		<div slot="footer">
+			<lightning-button label="Close" variant="brand" onclick={closeModal}></lightning-button>
+		</div>
+	</c-modal>
 
 	<lightning-layout horizontal-align="space">
 
@@ -7,31 +14,33 @@
 		</lightning-layout-item>
 
 		<template if:true={studentBrowserView}>
-			<lightning-layout-item  padding="around-small" size="6">
+			<lightning-layout-item padding="around-small" size="6">
 				<c-student-browser></c-student-browser>
 			</lightning-layout-item>
-			<lightning-layout-item  padding="around-small" size="4">
+			<lightning-layout-item padding="around-small" size="4">
 				<c-student-detail></c-student-detail>
 			</lightning-layout-item>
 		</template>
 
 		<template if:true={tripReportView}>
-			<lightning-layout-item  padding="around-small" size="10">
+			<lightning-layout-item padding="around-small" size="10">
 				<lightning-card title="Trip Reports will go here"></lightning-card>
 			</lightning-layout-item>
 		</template>
 
 		<template if:true={certifiedStudentsView}>
-			<lightning-layout-item  padding="around-small" size="10">
-				<c-certfied-students-list certification-id={certificationId} certification-name={certificationName}></c-certfied-students-list>
+			<lightning-layout-item padding="around-small" size="10">
+				<c-certfied-students-list certification-id={certificationId} certification-name={certificationName}>
+				</c-certfied-students-list>
 			</lightning-layout-item>
 		</template>
 
 		<template if:true={certPopularityView}>
-			<lightning-layout-item  padding="around-small" size="10">
+			<lightning-layout-item padding="around-small" size="10">
 				<lightning-card title="Cert Popularity will go here"></lightning-card>
 			</lightning-layout-item>
 		</template>
 
 	</lightning-layout>
+</span>
 </template>
