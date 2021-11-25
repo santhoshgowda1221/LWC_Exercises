@@ -3,6 +3,7 @@ import getCertifiedStudents from '@salesforce/apex/CertifiedStudentList.getCerti
 import deleteStudentCertifications from '@salesforce/apex/CertifiedStudentList.deleteStudentCertifications';
 import {refreshApex} from '@salesforce/apex';
 import Utils from 'c/utils';
+import LABEL_FEATURE_NOT_AVAILABLE from '@salesforce/label/c.Feature_Not_Available';
 
 
 export default class CertifiedStudentsList extends LightningElement {
@@ -75,7 +76,7 @@ this.btnGroupDisabled = (numSelected === 0);
     }
 
     notAvailable() {
-        Utils.showModal(this,'Not Available', 'This feature iscurrently unavailable');
+        Utils.showModal(this,'Not Available',LABEL_FEATURE_NOT_AVAILABLE);
         }
 
 }
