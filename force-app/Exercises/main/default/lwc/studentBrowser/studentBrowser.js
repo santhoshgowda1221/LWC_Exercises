@@ -7,8 +7,12 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	@wire(MessageContext) info;
 	selectedInstructorId = "";
 	selectedDeliveryId = "";
+	students = [];
 
-	@wire(getStudents, { instructorId: "$selectedInstructorId", courseDeliveryId: "$selectedDeliveryId" }) students;
+	@wire(getStudents, { instructorId: "$selectedInstructorId", courseDeliveryId: "$selectedDeliveryId" }) wired_getStudents(result) {
+		this.students = result;
+		this.dispatchEvent(new CustomEvent("doneloading", { bubbles: true, composed: true }));
+	}
 	//can write logic here for error and data
 	// @wire(getStudents,{instructorId:'', courseDeliveryId:''}) students({error , data}){};
 
@@ -37,6 +41,7 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	handleFilterCHange(event) {
 		this.selectedInstructorId = event.detail.instructorId;
 		this.selectedDeliveryId = event.detail.deliveryId;
+		this.dispatchEvent(new CustomEvent("loading", { bubbles: true, composed: true }));
 	}
 
 	handleStudentSelected(event) {
